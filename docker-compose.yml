@@ -9,7 +9,8 @@ services:
       - ./.env
     volumes:
       - astrato-volume:/usr/src/app
-
+    environment:
+      npm_config_cache: "/usr/src/app/.npm"
 
 volumes:
   astrato-volume:
