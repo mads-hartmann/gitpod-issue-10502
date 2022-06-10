@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  node:
+    image: node:16.15.0-alpine
+    command: sh -c "npm run start"
+    working_dir: /usr/src/app
+    user: "${DOCKER_SERVICES_RUN_AS_USER}"
+    env_file:
+      - ./.env
+    volumes:
+      - astrato-volume:/usr/src/app
+
+
+volumes:
+  astrato-volume:
+    name: astrato-volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: '${PWD}'

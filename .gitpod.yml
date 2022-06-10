@@ -1,0 +1,11 @@
+tasks:
+  - name: setup
+    init: |
+      npm ci
+      echo "DOCKER_SERVICES_RUN_AS_USER=$(id -u):$(id -g)" >> .env
+      /usr/bin/gp sync-done prepenv
+      exit 0
+  - name: Start app
+    command: |
+      /usr/bin/gp sync-await prepenv
+      docker-compose up
